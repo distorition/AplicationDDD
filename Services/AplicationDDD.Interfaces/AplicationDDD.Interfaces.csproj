@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\AplicatioDDD.Domain\AplicatioDDD.Domain.csproj" />
+    <ProjectReference Include="..\AplicationDDD.Interfaces.Base\AplicationDDD.Interfaces.Base.csproj" />
+  </ItemGroup>
+
 </Project>

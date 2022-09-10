@@ -1,15 +1,31 @@
+using AplicationDDD.DAL.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var service = builder.Services;
+var connection_type = builder.Configuration["DataBase"];//так мы сможем менять пдключения к нашей базе данных не использую постоянно строку подключения (указанно в appseting.json)
+var connectio_string=builder.Configuration.GetConnectionString(connection_type);
+
+switch (connection_type)//таким образом мы сделали переклюения между базами данных
+{
+    case "SqlServer"://если указан SqlServer то подключаем его
+        service.AddDbContext<AppDB>(opt => opt.UseSqlServer(connectio_string,opt=>opt.MigrationsAssembly("AplicationDDD.DAL.MsQLServer")));//но нам надо указать название сборки базы данных
+        break;
+    case "SqlLite":// если указан SqlLite то подключаем его
+        service.AddDbContext<AppDB>(opt => opt.UseSqlite(connectio_string,opt=>opt.MigrationsAssembly("ApplicationDDD.DAL.SqlLite")));
+        break;
+}
+
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

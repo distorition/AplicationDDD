@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AplicationDDD.Domain.Base\AplicationDDD.Domain.Base.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\AplicationDDD.DAL\AplicationDDD.DAL.csproj" />
   </ItemGroup>
 
 </Project>

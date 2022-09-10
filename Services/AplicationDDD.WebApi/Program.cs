@@ -1,3 +1,4 @@
+using AplicationDDD.DAL;
 using AplicationDDD.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ switch (connection_type)//таким образом мы сделали переклюени€ между базами данн
         break;
 }
 
+service.AddTransient<AppDbInicalizator>();//добавили наш ƒЅ иницализатор в сервисы
 
 builder.Services.AddControllers();
 
@@ -25,6 +27,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using(var scope = app.Services.CreateScope())//using чтобы все наши верменные обьекты были удалены 
+{
+    var initializer = scope.ServiceProvider.GetRequiredService<AppDbInicalizator>();
+
+    await initializer.InitialAsync(RemoveBefore:true);//таким образом наша бд всегда будет удал€тьс€ и создаватьс€ заново при запуске приложени€ 
+}
 
 if (app.Environment.IsDevelopment())
 {

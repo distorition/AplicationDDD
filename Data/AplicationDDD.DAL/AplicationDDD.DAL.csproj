@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AplicatioDDD.Domain\AplicatioDDD.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\AplicationDDD.Interfaces\AplicationDDD.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

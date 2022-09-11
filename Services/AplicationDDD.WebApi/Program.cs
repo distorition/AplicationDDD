@@ -31,7 +31,7 @@ using(var scope = app.Services.CreateScope())//using чтобы все наши верменные об
 {
     var initializer = scope.ServiceProvider.GetRequiredService<AppDbInicalizator>();
 
-    await initializer.InitialAsync(RemoveBefore:true);//таким образом наша бд всегда будет удаляться и создаваться заново при запуске приложения 
+    await initializer.InitialAsync(RemoveBefore:false);//таким образом наша бд всегда будет удаляться и создаваться заново при запуске приложения 
 }
 
 if (app.Environment.IsDevelopment())

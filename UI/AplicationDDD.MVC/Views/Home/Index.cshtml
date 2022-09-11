@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<AplicatioDDD.Domain.Entities.Employe>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,27 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Фамилия</th>
+            <th> Имя</th>
+            <th> Отчество</th>
+            <th> Зп</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employe in Model)
+        {
+            <tr>
+                <td>@employe.id</td>
+                <td>@employe.name</td>
+                <td>@employe.LastName</td>
+                <td>@employe.Patronomic</td>
+                <td>@employe.Salary</td>
+            </tr>
+        }
+    </tbody>
+</table>

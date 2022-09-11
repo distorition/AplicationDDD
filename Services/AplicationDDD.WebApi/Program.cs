@@ -1,5 +1,7 @@
 using AplicationDDD.DAL;
 using AplicationDDD.DAL.Context;
+using AplicationDDD.DAL.Repositories;
+using AplicationDDD.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,8 @@ switch (connection_type)//таким образом мы сделали переклюени€ между базами данн
 }
 
 service.AddTransient<AppDbInicalizator>();//добавили наш ƒЅ иницализатор в сервисы
+
+service.AddScoped(typeof(IRepositoryAsync<>), typeof(EntitiesRepositories<>));// таким образом сами сервисы смогут подставл€ть нужные нам типы данных в репозиторрий 
 
 builder.Services.AddControllers();
 

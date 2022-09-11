@@ -1,21 +1,26 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AplicationDDD.MVC.Models;
+using AplicationDDD.Interfaces;
+using AplicatioDDD.Domain.Entities;
 
 namespace AplicationDDD.MVC.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IRepositoryAsync<Employe> Employes;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IRepositoryAsync<Employe> repositoryAsync,ILogger<HomeController> logger)
     {
+        Employes = repositoryAsync;
         _logger = logger;
     }
 
-    public IActionResult Index()
-    {
-        return View();
+    public async Task<IActionResult> Index()
+    {   
+        var employe= await Employes.GetAllAsync();
+        return View(employe);
     }
 
     public IActionResult Privacy()

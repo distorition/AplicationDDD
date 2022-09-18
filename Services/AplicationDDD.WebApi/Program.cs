@@ -12,6 +12,7 @@ var connectio_string=builder.Configuration.GetConnectionString(connection_type);
 
 switch (connection_type)//таким образом мы сделали переклюения между базами данных
 {
+    case "DockerDb":
     case "SqlServer"://если указан SqlServer то подключаем его
         service.AddDbContext<AppDB>(opt => opt.UseSqlServer(connectio_string,opt=>opt.MigrationsAssembly("AplicationDDD.DAL.MsQLServer")));//но нам надо указать название сборки базы данных
         break;
